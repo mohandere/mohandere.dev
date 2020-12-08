@@ -1,56 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
-import '../styles/index.css';
+import React from 'react'
+import { Link, graphql } from 'gatsby'
+import Helmet from 'react-helmet'
 
-function Index() {
-  const [date, setDate] = useState(null);
-  useEffect(() => {
-    async function getDate() {
-      const res = await fetch('/api/date');
-      const newDate = await res.text();
-      setDate(newDate);
-    }
-    getDate();
-  }, []);
-  return (
-    <main>
-      <Helmet>
-        <title>Gatsby + Node.js (TypeScript) API</title>
-      </Helmet>
-      <h1>Gatsby + Node.js (TypeScript) API</h1>
-      <h2>
-        Deployed with{' '}
-        <a
-          href="https://vercel.com/docs"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Vercel
-        </a>
-        !
-      </h2>
-      <p>
-        <a
-          href="https://github.com/vercel/vercel/tree/master/examples/gatsby"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          This project
-        </a>{' '}
-        is a <a href="https://www.gatsbyjs.org/">Gatsby</a> app with two
-        directories, <code>/src</code> for static content and <code>/api</code>{' '}
-        which contains a serverless{' '}
-        <a href="https://nodejs.org/en/">Node.js (TypeScript)</a> function. See{' '}
-        <a href="/api/date">
-          <code>api/date</code> for the Date API with Node.js (TypeScript)
-        </a>
-        .
-      </p>
-      <br />
-      <h2>The date according to Node.js (TypeScript) is:</h2>
-      <p>{date ? date : 'Loading date...'}</p>
-    </main>
-  );
+import Bio from '../components/Bio'
+import Layout from '../components/Layout'
+import { rhythm } from '../utils/typography'
+
+class BlogIndex extends React.Component {
+  render() {
+    const { data } = this.props;
+    const siteTitle = data.site.siteMetadata.title
+    const siteDescription = data.site.siteMetadata.description
+    const posts = data.allMarkdownRemark.edges
+
+    return (
+      <Layout location={this.props.location} title={siteTitle}>
+        <Helmet
+          htmlAttributes={{ lang: 'en' }}
+          meta={[{ name: 'description', content: siteDescription }]}
+          title={siteTitle}
+        />
+        {posts.map(({ node }) => {
+          const title = node.frontmatter.title || node.fields.slug
+          return (
+            <article key={node.fields.slug}>
+              <h3
+                style={{
+                  marginBottom: rhythm(1 / 4),
+                }}
+              >
+                <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
+                  {title}
+                </Link>
+              </h3>
+              <small>{node.frontmatter.date}</small>
+              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+            </article>
+          )
+        })}
+        <hr
+          style={{
+            marginBottom: rhythm(1),
+          }}
+        />
+        <Bio />
+      </Layout>
+    )
+  }
 }
 
-export default Index;
+export default BlogIndex
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      edges {
+        node {
+          excerpt
+          fields {
+            slug
+          }
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+          }
+        }
+      }
+    }
+  }
+`

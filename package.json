@@ -1,21 +1,70 @@
 {
+  "name": "reactive",
   "private": true,
-  "name": "gatsby",
+  "description": "Code, learn and share.",
   "version": "1.0.0",
+  "author": "Mohan Dere <deremohan01@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/mohandere.github.io/"
+  },
   "dependencies": {
-    "gatsby": "^2.18.14",
-    "gatsby-image": "^2.0.15",
+    "gatsby": "^2.0.19",
+    "gatsby-plugin-feed": "^2.0.8",
+    "gatsby-plugin-google-analytics": "^2.0.5",
+    "gatsby-plugin-google-tagmanager": "^2.3.11",
     "gatsby-plugin-manifest": "^2.0.5",
+    "gatsby-plugin-offline": "^3.6.0",
+    "gatsby-plugin-prefetch-google-fonts": "^1.3.1",
     "gatsby-plugin-react-helmet": "^3.0.0",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1",
-    "react-helmet": "^5.2.0"
+    "gatsby-plugin-remove-serviceworker": "^1.0.0",
+    "gatsby-plugin-sharp": "^2.0.6",
+    "gatsby-plugin-typography": "^2.2.0",
+    "gatsby-remark-copy-linked-files": "^2.0.5",
+    "gatsby-remark-images": "^3.7.0",
+    "gatsby-remark-prismjs": "^3.0.0",
+    "gatsby-remark-responsive-iframe": "^2.0.5",
+    "gatsby-remark-smartypants": "^2.0.5",
+    "gatsby-source-filesystem": "^2.0.2",
+    "gatsby-source-wordpress": "^3.0.17",
+    "gatsby-transformer-remark": "^2.1.6",
+    "gatsby-transformer-sharp": "^2.1.3",
+    "prismjs": "^1.15.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-typography": "^0.16.13",
+    "typeface-merriweather": "1.1.13",
+    "typeface-montserrat": "1.1.13",
+    "typography": "^0.16.17",
+    "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
-    "@now/node": "^1.3.0"
+    "eslint": "^7.15.0",
+    "eslint-plugin-react": "^7.11.1",
+    "prettier": "^2.2.1"
+  },
+  "homepage": "https://mohandere.github.io",
+  "keywords": [
+    "blog",
+    "reactjs",
+    "reduxjs",
+    "javascript",
+    "frontend"
+  ],
+  "license": "MIT",
+  "main": "n/a",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohandere.github.io.git"
   },
   "scripts": {
-    "dev": "gatsby develop",
-    "build": "gatsby build"
+    "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "build": "gatsby build",
+    "deploy": "gatsby build && gh-pages -d public -b master",
+    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
   }
 }
