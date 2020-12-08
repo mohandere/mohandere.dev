@@ -33,9 +33,8 @@ class Layout extends React.Component {
         <p style={{
           marginBottom: rhythm(1.5),
         }}>
-          My name's Mohan and I like to learn and teach about software development.
+          My name's Mohan. I like to learn and teach about web development.
         </p>
-        <h2>Latest Articles</h2>
         </>
       )
     } else {

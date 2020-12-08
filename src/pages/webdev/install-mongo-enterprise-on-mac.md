@@ -1,6 +1,6 @@
 ---
 title: Install Mongo DB on Mac OS
-date: "2020-08-05T22:40:32.169Z"
+date: "2018-08-05T22:40:32.169Z"
 ---
 
 # Method 01
