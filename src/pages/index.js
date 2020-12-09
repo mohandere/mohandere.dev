@@ -3,6 +3,7 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import Bio from '../components/Bio'
+import Footer from '../components/Footer'
 import Layout from '../components/Layout'
 import { rhythm } from '../utils/typography'
 
@@ -20,6 +21,7 @@ class BlogIndex extends React.Component {
           meta={[{ name: 'description', content: siteDescription }]}
           title={siteTitle}
         />
+        <Bio />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
@@ -43,7 +45,7 @@ class BlogIndex extends React.Component {
             marginBottom: rhythm(1),
           }}
         />
-        <Bio />
+        <Footer />
       </Layout>
     )
   }

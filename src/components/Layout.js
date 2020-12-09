@@ -11,10 +11,9 @@ class Layout extends React.Component {
 
     if (location.pathname === rootPath) {
       header = (
-        <>
         <h1
           style={{
-            ...scale(1.5),
+            ...scale(1),
             marginTop: 0,
             marginBottom: 0,
           }}
@@ -30,12 +29,6 @@ class Layout extends React.Component {
             {title}
           </Link>
         </h1>
-        <p style={{
-          marginBottom: rhythm(1.5),
-        }}>
-          My name's Mohan. I like to learn and teach about web development.
-        </p>
-        </>
       )
     } else {
       header = (
