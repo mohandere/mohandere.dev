@@ -1,0 +1,27 @@
+---
+title: Challenges on UI
+date: 2021/02/15
+tag: ui
+description: What are the challenges do developers face on UI
+---
+
+# Challenges on UI
+
+Fitness functions - Used for objective assessment, to measure the stuff you care about, we can run ff over time
+
+
+$Fast paced econsystem
+UX consitancy
+Partitioning complexity
+Testing complexity
+
+How to build evaluable UI
+Define whats important for your system
+Build objective fitness functions
+Apply and review them regularly
+
+What is evalutionary architectuere is?
+Evolution- Cumulative change of characterstics of a population over time
+Change is inevitable
+evalutionary architectuere means incremental guided change, change is first class citizen
+
