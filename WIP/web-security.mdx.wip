@@ -11,11 +11,11 @@ Security is a paramount concern, and yet its ignored by many frontend devs/organ
 
 ### Table of content
 - Why?
+- Type of Attacks
+- Top 10 security risks
 - Security Principles
 - Secure path to production
   - A Typical SDLC Testing Workflow
-- Top 10 security risks
-- Type of Attacks
 - Testing Tools
   - Security Testing Tools Pyramid
   - Classes of Tools
@@ -26,6 +26,10 @@ Security is a paramount concern, and yet its ignored by many frontend devs/organ
 
 
 #### Why?
+
+#### Type of Attacks
+
+#### Top 10 security risks
 
 #### Security Principles
 - Awareness
