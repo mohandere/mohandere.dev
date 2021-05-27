@@ -1,7 +1,16 @@
 import Head from 'next/head'
+import Prism from 'prism-react-renderer/prism'
 
 import 'nextra-theme-blog/style.css'
 import '../styles/main.css'
+
+(typeof global !== "undefined" ? global : window).Prism = Prism;
+
+// require("prismjs/components/prism-js")
+// require("prismjs/components/prism-jsx")
+// require("prismjs/components/prism-tsx")
+// require("prismjs/components/prism-typescript")
+// require("prismjs/components/prism-json")
 
 export default function MyApp({ Component, pageProps }) {
   return (
