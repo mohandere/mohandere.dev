@@ -26,7 +26,7 @@ jest.mock('@myorg/core', () => {
 
 ### Mock default export from library
 
-```
+```jsx
 jest.mock('@react-native-firebase/analytics', () => ({
   __esModule: true,
   default: () => ({
@@ -38,7 +38,7 @@ jest.mock('@react-native-firebase/analytics', () => ({
 
 ### Mock React component from library
 
-```
+```jsx
 jest.mock('@myorg/ui-components', () => {
   const originalModule = jest.requireActual('@myorg/ui-components');
   return {
@@ -69,7 +69,7 @@ const MockedStepper = ({
 
 ## Re-render component in RTL
 
-```
+```jsx
 import { render } from '@testing-library/react'
 
 const { rerender } = render(<NumberDisplay number={1} />)
@@ -81,7 +81,7 @@ rerender(<NumberDisplay number={2} />)
 
 ## Wait for next render with RTL
 
-```
+```jsx
 import React from "react";
 import { render, screen, wait } from "@testing-library/react"; // highlight-line
 import Index from "./Index";
@@ -90,7 +90,6 @@ import { fetchPosts } from "./api/posts";
 
 jest.mock("./api/posts");
 
-// highlight-next-line
 test("We show a list of posts", async () => {
   const posts = [{ id: 1, title: "My post", url: "/1" }];
 
@@ -103,22 +102,22 @@ test("We show a list of posts", async () => {
   expect(fetchPosts).toHaveBeenCalledTimes(1);
   expect(fetchPosts).toHaveBeenCalledWith();
 
+  // highlight-start
   expect(await screen.findByText('My Posts')).toBeInTheDocument());
   // OR
   await waitFor(() => expect(screen.getByText("My Posts")).toBeInTheDocument());
-  
+  // highlight-end
+
   posts.forEach((post) =>
     expect(screen.getByText(post.title)).toBeInTheDocument()
   );
-  // highlight-end
 });
-
 ```
 
 
 ## Wait for next render
 
-```
+```jsx
 const waitForNextTick = () => {
   jest.useRealTimers();
   return new Promise((resolve) => setTimeout(resolve));
@@ -143,7 +142,7 @@ test('should be able to go next page on submit', async () => {
 
 ## spyOn
 
-```
+```jsx
 // Example 1
 
 ...
@@ -163,7 +162,6 @@ jest.spyOn(UserService, 'verifyOTP').mockImplementation(() => Promise.reject({
   errorCode: 'E1001',
   errorMessage: 'Something went wrong. Please try again',
 }));
-
 ```
 
 Thanks!
