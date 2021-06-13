@@ -1,0 +1,108 @@
+---
+title: TypeScript 03 - Tuples
+date: 2021/02/11
+tag: typescript
+description: TypeScript 101 series
+---
+
+# TypeScript 03 - Tuples
+
+Typically an array contains zero to many objects of a
+single type. TypeScript has special analysis around
+arrays which contain multiple types, and where the order
+in which they are indexed is important.
+
+These are called tuples. Think of them as a way to
+connect some data, but with less syntax than keyed objects.
+
+You can create a tuple using JavaScript's array syntax:
+
+```js
+const failingResponse = ["Not Found", 404];
+const passingResponse = ["{}", 200];
+```
+
+but you will need to declare its type as a tuple.
+
+```ts
+const passingResponse: [string, number] = ["{}", 200];
+```
+
+As an array, the order is not important so an item at
+any index could be either a string or a number. In the
+tuple the order and length are guaranteed.
+
+```ts
+if (passingResponse[1] === 200) {
+  const localInfo = JSON.parse(passingResponse[0]);
+  console.log(localInfo);
+}
+```
+
+This means TypeScript will provide the correct types at
+the right index, and even raise an error if you try to
+access an object at an un-declared index.
+
+```ts
+passingResponse[2]; // Error - Tuple type '[string, number]' of length '2' has no element at index '2'.
+```
+
+A tuple can feel like a good pattern for short bits of
+connected data or for fixtures.
+
+```ts
+type StaffAccount = [number, string, string, string?];
+
+const staff: StaffAccount[] = [
+  [0, "Adankwo", "adankwo.e@"],
+  [1, "Kanokwan", "kanokwan.s@"],
+  [2, "Aneurin", "aneurin.s@", "Supervisor"],
+];
+```
+
+When you have a set of known types at the beginning of a
+tuple and then an unknown length, you can use the spread
+operator to indicate that it can have any length and the
+extra indexes will be of a particular type:
+
+```ts
+type PayStubs = [StaffAccount, ...number[]];
+
+const payStubs: PayStubs[] = [
+  [staff[0], 250],
+  [staff[1], 250, 260],
+  [staff[0], 300, 300, 300],
+];
+
+const monthOnePayments = payStubs[0][1] + payStubs[1][1] + payStubs[2][1];
+const monthTwoPayments = payStubs[1][2] + payStubs[2][2];
+const monthThreePayments = payStubs[2][2];
+```
+
+You can use tuples to describe functions which take
+an undefined number of parameters with types:
+
+```ts
+declare function calculatePayForEmployee(
+  id: number,
+  ...args: [...number[]]
+): number;
+
+calculatePayForEmployee(staff[0][0], payStubs[0][1]);
+calculatePayForEmployee(staff[1][0], payStubs[1][1], payStubs[1][2]);
+```
+
+## More Examples
+
+```ts
+type ThreeDCoordinate = [x: number, y: number, z: number];
+
+function add3DCoordinate(
+  c1: ThreeDCoordinate,
+  c2: ThreeDCoordinate
+): ThreeDCoordinate {
+  return [c1[0] + c2[0], c1[1] + c2[1], c1[2] + c2[2]];
+}
+
+console.log(add3DCoordinate([0, 100, 0], [10, 20, 30]));
+```

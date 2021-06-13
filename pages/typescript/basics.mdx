@@ -1,0 +1,117 @@
+---
+title: TypeScript 01 - Basics
+date: 2021/02/11
+tag: typescript
+description: TypeScript 101 series
+---
+
+# TypeScript 01 - Basics
+
+## What is TypeScript(TS)
+
+## Why we should care? Advantages/Disadvantage
+
+## Everyday Types
+
+- number
+- string
+- boolean
+- any
+- unknown
+- null
+- undefined
+
+#### Arrays/Collections
+
+```ts
+// Example 1
+const arr: number[] = [1, 2, 3];
+
+// Example 2
+interface User {
+  name: string;
+  age: number;
+}
+const users: User[] = [
+  {
+    name: "Joe",
+    age: 22,
+  },
+];
+```
+
+##### Dynamic keys
+
+```ts
+interface Product {
+  id: string,
+  title: string,
+  [key string]: any;
+}
+const products: Product[] = [{
+  id: 'AdffEW',
+  title: Redmi Note 5 Pro',
+  price: 13342
+  // ... more dynamic keys
+}];
+```
+
+##### Nested Objects
+
+```ts
+interface IAddress {
+  pin: number;
+}
+
+interface IStudent {
+  id: number;
+  name: string;
+  address: IAddress;
+}
+const students: IStudent[] = [
+  {
+    id: 1,
+    name: "John Doe",
+    address: {
+      pin: 422604,
+    },
+  },
+];
+```
+
+#### Functions
+
+```ts
+type Point  = {
+  x: number,
+  y: number
+}
+function getCoord(x: number; y: number): Point {
+  return {
+    x, y
+  }
+}
+printCoord(x: 3, y: 7);
+
+// Optional param
+function printName(obj: { first: string; last?: string }) {
+  // ...
+}
+// Both OK
+printName({ first: "Bob" });
+printName({ first: "Alice", last: "Alisson" });
+```
+
+#### Union Types
+
+```ts
+function printId(id: number | string) {
+  console.log("Your ID is: " + id);
+}
+// OK
+printId(101);
+// OK
+printId("202");
+// Error
+printId({ myID: 22342 });
+```

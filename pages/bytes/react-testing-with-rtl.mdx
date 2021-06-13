@@ -1,23 +1,22 @@
 ---
-title: Jest/React testing snippets
+title: Jest/React testing basics
 date: 2021/06/03
-tag: web
+tag: testing
 description: Collection of Jest/React testing snippets
 ---
 
-# Collection of Jest/React testing snippets
-
+# Jest/React testing basics
 
 ## Mock a library/package
 
 ```jsx
-jest.mock('@myorg/core', () => {
-  const originalModule = jest.requireActual('@myorg/core');
+jest.mock("@myorg/core", () => {
+  const originalModule = jest.requireActual("@myorg/core");
   return {
     __esModule: true,
     ...originalModule,
     useRemoteConfig: () => ({
-      getRemoteValue: jest.fn(() => 'https://myuserservice/v2'),
+      getRemoteValue: jest.fn(() => "https://myuserservice/v2"),
     }),
     useFeatureToggle: jest.fn().mockImplementation(() => false),
   };
@@ -27,7 +26,7 @@ jest.mock('@myorg/core', () => {
 ### Mock default export from library
 
 ```jsx
-jest.mock('@react-native-firebase/analytics', () => ({
+jest.mock("@react-native-firebase/analytics", () => ({
   __esModule: true,
   default: () => ({
     logEvent: jest.fn(),
@@ -35,12 +34,11 @@ jest.mock('@react-native-firebase/analytics', () => ({
 }));
 ```
 
-
 ### Mock React component from library
 
 ```jsx
-jest.mock('@myorg/ui-components', () => {
-  const originalModule = jest.requireActual('@myorg/ui-components');
+jest.mock("@myorg/ui-components", () => {
+  const originalModule = jest.requireActual("@myorg/ui-components");
   return {
     __esModule: true,
     ...originalModule,
@@ -48,11 +46,7 @@ jest.mock('@myorg/ui-components', () => {
   };
 });
 
-const MockedStepper = ({
-  activeStep,
-  totalSteps,
-  onStepIconPress,
-}) => {
+const MockedStepper = ({ activeStep, totalSteps, onStepIconPress }) => {
   const onButtonClick = () => {};
   return (
     <div testID="stepper">
@@ -70,14 +64,11 @@ const MockedStepper = ({
 ## Re-render component in RTL
 
 ```jsx
-import { render } from '@testing-library/react'
-
-const { rerender } = render(<NumberDisplay number={1} />)
-
+import { render } from "@testing-library/react";
+const { rerender } = render(<NumberDisplay number={1} />);
 // re-render the same component with different props
-rerender(<NumberDisplay number={2} />)
+rerender(<NumberDisplay number={2} />);
 ```
-
 
 ## Wait for next render with RTL
 
@@ -94,11 +85,11 @@ test("We show a list of posts", async () => {
   const posts = [{ id: 1, title: "My post", url: "/1" }];
 
   fetchPosts.mockResolvedValueOnce(posts);
-  
+
   render(<Index />);
-  
+
   expect(screen.getByText("Loading...")).toBeInTheDocument();
-  
+
   expect(fetchPosts).toHaveBeenCalledTimes(1);
   expect(fetchPosts).toHaveBeenCalledWith();
 
@@ -114,7 +105,6 @@ test("We show a list of posts", async () => {
 });
 ```
 
-
 ## Wait for next render
 
 ```jsx
@@ -123,20 +113,20 @@ const waitForNextTick = () => {
   return new Promise((resolve) => setTimeout(resolve));
 };
 
-test('should be able to go next page on submit', async () => {
+test("should be able to go next page on submit", async () => {
   const { queryByTestId, queryByText, findByTestId } = component;
   // On page 1
-  expect(queryByTestId('Name und Geburtstag')).toBeTruthy();
-  changeFirstName('John');
-  changeLastName('De');
-  changeDob('12.01.1991');
-  const submitButton = await findByTestId('submit');
+  expect(queryByTestId("Name und Geburtstag")).toBeTruthy();
+  changeFirstName("John");
+  changeLastName("De");
+  changeDob("12.01.1991");
+  const submitButton = await findByTestId("submit");
   jest.useFakeTimers();
   fireEvent.click(submitButton);
   jest.runAllTimers();
   await waitForNextTick();
   // On page 2
-  expect(queryByTestId('Kontakt und AGB’s')).toBeTruthy();
+  expect(queryByTestId("Kontakt und AGB’s")).toBeTruthy();
 });
 ```
 

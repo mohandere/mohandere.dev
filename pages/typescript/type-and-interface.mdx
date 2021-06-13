@@ -1,0 +1,95 @@
+---
+title: TypeScript 02 - Type vs Interface
+date: 2021/02/11
+tag: typescript
+description: TypeScript 101 series
+---
+
+# TypeScript 02 - Type and Interface
+
+## Type and interface
+
+There are two main tools to declare the shape of an object: interfaces and type aliases.
+
+```ts
+type BirdType = {
+  wings: 2;
+};
+
+interface BirdInterface {
+  wings: 2;
+}
+
+const bird1: BirdType = { wings: 2 };
+const bird2: BirdInterface = { wings: 2 };
+```
+
+it's possible to intermix their use too.
+
+```ts
+const bird3: BirdInterface = bird1;
+```
+
+They both support extending other interfaces and types.
+Type aliases do this via intersection types, while
+interfaces have a keyword.
+
+```ts
+type Owl = { nocturnal: true } & BirdType;
+type Robin = { nocturnal: false } & BirdInterface;
+
+interface Peacock extends BirdType {
+  colourful: true;
+  flies: false;
+}
+interface Chicken extends BirdInterface {
+  colourful: false;
+  flies: false;
+}
+
+let owl: Owl = { wings: 2, nocturnal: true };
+let chicken: Chicken = { wings: 2, colourful: false, flies: false };
+```
+
+TS recommend you use interfaces over type
+aliases. Specifically, because you will get better error
+messages. TypeScript can provide terser and more focused
+messages when working with interfaces.
+
+```ts
+owl = chicken; // Error - Type 'Chicken' is not assignable to type 'Owl'. Property 'nocturnal' is missing in type 'Chicken' but required in type '{ nocturnal: true; }'
+chicken = owl; // Error - Type 'Owl' is missing the following properties from type 'Chicken': colourful, flies
+```
+
+One major difference between type aliases vs interfaces
+are that interfaces are open and type aliases are closed.
+This means you can extend an interface by declaring it
+a second time.
+
+```ts
+interface Kitten {
+  purrs: boolean;
+}
+
+interface Kitten {
+  colour: string;
+}
+```
+
+In the other case a type cannot be changed outside of its declaration.
+Below code will throw an error `Duplicate identifier 'Puppy'`
+
+```ts
+type Puppy = {
+  color: string;
+};
+type Puppy = {
+  toys: number;
+};
+```
+
+However for publicly exposed types, it's a better call to make them an interface.
+
+### References
+
+- [TypeScript: Interfaces vs Types](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/52682220#52682220)
