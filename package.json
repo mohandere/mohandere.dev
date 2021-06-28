@@ -9,6 +9,7 @@
     "build": "next build"
   },
   "dependencies": {
+    "@lyket/react": "^1.4.7",
     "gray-matter": "^4.0.2",
     "next": "^10.0.0",
     "nextra": "^0.2.6",
