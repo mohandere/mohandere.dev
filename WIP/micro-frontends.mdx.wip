@@ -1,0 +1,65 @@
+---
+title: Micro-frontends - Integration Approaches
+date: 2021/02/21
+tag: web
+description: Understand different MFE Integration Approaches
+---
+
+# Micro-frontends - Integration Approaches
+
+For questions like what are Micro-frontends(MFEs)? why should we care about them?
+please go though [this](https://martinfowler.com/articles/micro-frontends.html) blog by [Cam Jackson](https://camjackson.net/)
+
+In this blog will overview different approaches we can use to integrate MFE in container(Host) application.
+
+## How MFEs served
+
+- Per page
+- Per sub domain
+- More than 1 MFEs on single page
+
+## Considerations
+- Design
+- Common interface for communication 
+- Data sharing/exchange - Global state
+- Consistent look and feel
+
+
+## Integration Approaches
+
+- Build time
+- Run time
+
+### 1. Build-time integration
+
+```js
+{
+  "name": "@my-ecomm-app",
+  "version": "1.0.0",
+  "description": "A E-commerce app",
+  "dependencies": {
+    "@my-ecomm-app/cart": "^1.2.3",
+    "@my-ecomm-app/product": "^4.5.6",
+    "@my-ecomm-app/catalog": "^7.8.9",
+    "@my-ecomm-app/user": "^7.8.9",
+    ...
+  }
+}
+```
+
+### Run-time
+
+- Integration via iframes
+- Integration via JavaScript
+- Integration via Web Components
+- Server-side template composition/Server Side Includes
+- Federated modules/Dynamic components loading
+
+### Frameworks
+
+- [single-spa](https://single-spa.js.org/)
+- [piral](https://github.com/smapiot/piral)
+
+#### More Details
+
+- [awesome-micro-frontends](https://github.com/rajasegar/awesome-micro-frontends#frameworks)
