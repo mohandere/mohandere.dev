@@ -44,13 +44,6 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Provider apiKey="pt_486fd32c067690889ba35056819b7f">
         <Head>
-          <link
-            rel="preload"
-            href="/fonts/Inter-roman.latin.var.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap"
