@@ -1,8 +1,8 @@
 ---
 title: Tip - How to use React Context
-date: 2021/02/25
+date: 2021/06/01
 tag: react
-description: Use React context along with hook
+description: How better use of React context along with hook
 ---
 
 # Tip - How to use React Context
@@ -18,25 +18,25 @@ example of `e-commerce` app. In e-commerce app we can have below features/module
 - Notifications
 - etc
 
-so we write a code, we can create `context` per feature to have distinct boundaries between modules.
+so we write a code, we can create `context` per feature to have distinct boundaries between modules. It may look like this
 
-```jsx
+```tsx
 /src
   /home
   /catalog
-      CatalogContext.jsx
-      index.jsx
+      CatalogContext.tsx
+      index.tsx
   /cart
-      CartContext.jsx
-      index.jsx
+      CartContext.tsx
+      index.tsx
   /checkout
-      CheckoutContext.jsx
-      index.jsx
+      CheckoutContext.tsx
+      index.tsx
   /payment
-      PaymentContext.jsx
-      index.jsx
-  AppContext.jsx
-  App.jsx
+      PaymentContext.tsx
+      index.tsx
+  AppContext.tsx
+  App.tsx
   ...
 
 ```
@@ -47,6 +47,8 @@ Also for auth/user data, we can have `UserContext` / `AuthContext`.
 Let's start with defining `AppContext`. For that will create a file `AppContext/AppContext.ts` with below sample code.
 
 ```tsx
+// AppContext/AppContext.ts
+
 import React, { useReducer } from "react";
 import { SET_IS_NET_CONNECTED } from "./actionTypes";
 
@@ -114,9 +116,14 @@ That's all!
 Finally we have to use `AppContext` in 'src/App.ts'
 
 ```tsx
+// src/App.ts
+
 import React from "react";
-import NetInfo from "@react-native-community/netinfo";
+import { AppProvider, useApp } from './AppContext.tsx';
+import { AuthProvider } from './AuthContext.tsx';
+import { UserProvider } from './UserContext.tsx';
 import Routes from "./Routes";
+import NetInfo from "@react-native-community/netinfo";
 
 const App = () => {
   const { state, dispatch } = useApp();
@@ -157,5 +164,27 @@ const App = () => {
 ```
 
 Further in each module's `index.js`, we can have same signature of `App.js` which it's own context provider.
+For example in catalog module
+
+```tsx
+// src/catalog/index.ts
+
+import React from "react";
+import Routes from "./Routes";
+import { CatalogProvider, useCatalog } from './CatalogContext.tsx';
+
+const Catalog = () => {
+  const { state, dispatch } = useCatalog();
+  ...
+
+  return (
+    <div>
+      <CatalogProvider>
+        <Routes />
+      </CatalogProvider>
+    </div>
+  );
+};
+```
 
 Thanks.
