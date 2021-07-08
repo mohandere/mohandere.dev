@@ -1,19 +1,18 @@
 ---
 title: OKR - Measure What Matters technique
 date: 2021/05/03
-tag: web
+tag: thoughts
 description: “OKRs” is collaborative goal-setting tool used by teams and individuals to set challenging, ambitious goals with measurable results.
 ---
 
 
 # OKR - Measure What Matters
 
-Few days back I came across this simple goal setting technique called OKR.
+Few days back I came across this simple goal setting technique called [OKR](https://www.whatmatters.com/).
 
-[OKR](https://www.whatmatters.com/) - objectives and key results - is simple goal setting technique/framework used by companies like Google, The Gates Foundation etc.
+[OKR](https://www.whatmatters.com/) - objectives and key results - is goal setting technique/framework used by companies like Google, The Gates Foundation, Spotify, Twitter, LinkedIn, and Airbnb etc.
 
-Individuals can also use this technique for their Growth.
-
+While OKRs are usually talked about in the context of companies, you can use OKRs just as effectively for yourself, whether you're a company of one or just want a more rigorous way to track your personal goals.
 
 ### Recommend Resources
 
